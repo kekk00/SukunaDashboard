@@ -6,6 +6,9 @@
 <title>SukunaBot Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1f1f2e, #2c2c44);
@@ -14,48 +17,70 @@ body {
     padding: 0;
 }
 
-/* Header con immagine e overlay */
-header {
-    position: sticky; 
+/* NAV BAR */
+.hero {
+    background: url("https://i.ibb.co/hJ0tZ0L6/3c03686c7dc590a177d215e4587c057a.jpg") center/cover no-repeat;
+    height: 60px;
+    position: sticky;
     top: 0;
-    background: url("https://i.ibb.co/PZMDGcS0/c8756687815f6b0c1ee2a41b6f2c5e99.jpg") center/cover no-repeat;
-    padding: 40px 20px; 
-    text-align: center;
-    font-size: 2.2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #fff;
     z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px 20px;
 }
-header::before {
+.hero::after {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.75);
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.75);
     z-index: -1;
 }
+.hero h1 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0;
+    position: relative;
+}
+
+/* MENU */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
 
 main {
     padding: 30px 20px;
     max-width: 1000px;
     margin: auto;
-    margin-top: 40px; 
+    margin-top: 40px;
 }
 h2 {
     text-align: center;
     margin-bottom: 20px;
     font-weight: 500;
 }
-
-/* Contenitore responsivo */
 .section {
     max-width: 800px;
     margin: auto;
 }
-
-/* Tabella */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -87,19 +112,8 @@ tr:hover {
 .status-pending { color: #efea6e; font-weight: bold; }
 .status-ban { color: #f44336; font-weight: bold; }
 .status-founder { color: #ff9800; font-weight: bold; }
-td:nth-child(1)::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 5px;
-    left: 0;
-    background-color: #fff;
-    transition: width 0.3s;
-}
-tr:hover td:nth-child(1)::after { width: 100%; }
 
-/* Staff cards */
+/* STAFF */
 .staff-grid {
     display: flex;
     gap: 20px;
@@ -123,36 +137,105 @@ tr:hover td:nth-child(1)::after { width: 100%; }
     object-fit: cover;
     margin-bottom: 10px;
 }
-.staff-card a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    text-decoration: none;
-    color: #fff;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-}
 .staff-role {
     background:#f44336;
     color:#fff;
     border-radius:5px;
     padding:3px 6px;
     font-size:0.8rem;
+    margin-bottom: 8px;
 }
+.staff-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    transition: opacity 0.3s;
+}
+.staff-card a:hover { opacity: 0.8; }
+.staff-card svg {
+    width:16px; height:16px;
+}
+
+/* LINKS */
+.links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.link-card {
+    background:#27293d;
+    border-radius:12px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:500;
+    transition:transform 0.3s;
+    position: relative;
+}
+.link-card:hover { transform:scale(1.05); }
+.link-card::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+.link-card:hover::after { width: 100%; }
+.link-card svg { width:18px; height:18px; }
+
+table a {
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+}
+table a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+table a:hover::after { width: 100%; }
+
 @media (max-width: 600px) {
     th, td { padding: 12px 10px; }
     .staff-card { width: 140px; padding:15px; }
     .staff-card img { width: 80px; height:80px; }
+    .link-card { font-size:0.9rem; padding:10px 14px; }
+    .link-card svg { width:16px; height:16px; }
 }
 </style>
 </head>
 <body>
 
-<header>SukunaBot Dashboard</header>
+<!-- NAV BAR -->
+<div class="hero">
+  <h1>SukunaBot Dashboard</h1>
+  <div class="nav-links">
+      <a href="#status">Status</a>
+      <a href="#staff">Staff</a>
+      <a href="#links">Utility</a>
+  </div>
+</div>
 
 <main>
-    <div class="section">
+    <!-- DASHBOARD -->
+    <div class="section" id="status">
         <h2>Dashboard ufficiale di SukunaBOT</h2>
         <table>
             <thead>
@@ -165,30 +248,41 @@ tr:hover td:nth-child(1)::after { width: 100%; }
         </table>
     </div>
 
-    <div class="section">
+    <!-- STAFF -->
+    <div class="section" id="staff">
         <h2>Il Nostro Staff</h2>
         <div class="staff-grid">
-
-            <!-- Card -->
             <div class="staff-card">
                 <img src="https://i.postimg.cc/FHZYdb1R/c8756687815f6b0c1ee2a41b6f2c5e99.jpg" alt="Kekko">
                 <h3>Sukuna</h3>
-                <a href="https://instagram.com/__immgiuseetbh" target="_blank">
-                    @__immgiuseetbh
-                </a>
                 <div class="staff-role">Founder & Server Host</div>
+                <a href="https://instagram.com/tuo_profilo" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.55-30.55C293.89,124,224,124,224,124s-69.89,0-94.16,7.08a54,54,0,0,0-30.55,30.55C92.16,149.89,92.16,192,92.16,192s0,42.11,7.09,66.38a54,54,0,0,0,30.55,30.55C154.11,300,224,300,224,300s69.89,0,94.16-7.08a54,54,0,0,0,30.55-30.55C331.84,234.11,331.84,192,331.84,192S331.84,149.89,324.71,161.66ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm76.8-87.43a11.43,11.43,0,1,1,11.43-11.43A11.42,11.42,0,0,1,300.8,184.57Z"/></svg>
+                  Instagram
+                </a>
             </div>
-
-            <!-- Card -->
             <div class="staff-card">
                 <img src="https://i.postimg.cc/XY4nPrc6/file.jpg" alt="Luca">
                 <h3>Luca</h3>
-                <a href="https://instagram.com/luca_gorghy" target="_blank">
-                    @luca_gorghy
-                </a>
                 <div class="staff-role">Fornitore</div>
+                <a href="https://instagram.com/altro_profilo" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.55-30.55C293.89,124,224,124,224,124s-69.89,0-94.16,7.08a54,54,0,0,0-30.55,30.55C92.16,149.89,92.16,192,92.16,192s0,42.11,7.09,66.38a54,54,0,0,0,30.55,30.55C154.11,300,224,300,224,300s69.89,0,94.16-7.08a54,54,0,0,0,30.55-30.55C331.84,234.11,331.84,192,331.84,192S331.84,149.89,324.71,161.66ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm76.8-87.43a11.43,11.43,0,1,1,11.43-11.43A11.42,11.42,0,0,1,300.8,184.57Z"/></svg>
+                  Instagram
+                </a>
             </div>
+        </div>
+    </div>
 
+    <!-- LINKS -->
+    <div class="section" id="links">
+        <h2>I Nostri Collegamenti</h2>
+        <div class="links-grid">
+            <a href="#" class="link-card">WhatsApp Group</a>
+            <a href="#" class="link-card">WhatsApp Channel</a>
+            <a href="#" class="link-card">Instagram</a>
+            <a href="#" class="link-card">TikTok</a>
+            <a href="#" class="link-card">Discord</a>
+            <a href="#" class="link-card">Sito Web Esterno</a>
         </div>
     </div>
 </main>
@@ -204,12 +298,11 @@ const numbers = [
 ];
 
 const table = document.getElementById('numbersTable');
-
 numbers.forEach(n => {
     const cleanNumber = n.number.replace(/[^0-9+]/g, '');
     const waLink = `https://wa.me/${cleanNumber.replace('+', '')}`;
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td><a href="${waLink}" target="_blank" style="color:inherit; text-decoration:none;">${n.number}</a></td>
+    tr.innerHTML = `<td><a href="${waLink}" target="_blank">${n.number}</a></td>
                     <td class="status-${n.status}">${n.status}</td>`;
     table.appendChild(tr);
 });
