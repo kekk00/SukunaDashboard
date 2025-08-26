@@ -25,7 +25,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 20px;
     background: #1f1f2e;
 }
 .hero h1 {
@@ -34,7 +34,7 @@ body {
     margin: 0;
 }
 
-/* MENU LINKS */
+/* DESKTOP MENU */
 .nav-links {
     display: flex;
     gap: 20px;
@@ -72,18 +72,18 @@ body {
     height: 3px;
     width: 100%;
     background: #fff;
-    margin: 3px 0;
+    margin: 4px 0;
     border-radius: 2px;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, opacity 0.4s ease;
 }
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(0, 7px);
 }
 .hamburger.active span:nth-child(2) {
     opacity: 0;
 }
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg) translate(0, -7px);
 }
 
 /* MOBILE NAV */
@@ -97,16 +97,14 @@ body {
     max-height: 0;
     overflow: hidden;
     background: rgba(0,0,0,0.75);
-    transition: max-height 0.4s ease, padding 0.4s ease;
+    transition: max-height 0.3s ease-in-out;
     z-index: 999;
-    padding: 0;
 }
 .nav-mobile.show {
-    max-height: 300px;
-    padding: 10px 0;
+    max-height: 500px;
 }
 .nav-mobile a {
-    padding: 12px 20px;
+    padding: 15px 20px;
     color: #fff;
     text-decoration: none;
 }
@@ -136,6 +134,8 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
 .status-pending { color: #efea6e; font-weight: bold; }
 .status-ban { color: #f44336; font-weight: bold; }
 .status-founder { color: #ff9800; font-weight: bold; }
+table a { color: #fff; text-decoration: none; }
+table a:hover { text-decoration: underline; }
 
 /* STAFF */
 .staff-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
@@ -149,9 +149,7 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
     cursor: pointer;
     position: relative;
 }
-.staff-card:hover {
-    transform: translateY(-5px);
-}
+.staff-card:hover { transform: translateY(-5px); }
 .staff-card::after {
     content: "";
     position: absolute;
@@ -160,34 +158,10 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
     border: 2px solid rgba(255,255,255,0);
     transition: border 0.3s;
 }
-.staff-card:hover::after {
-    border-color: #fff;
-}
-.staff-card img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-.staff-role {
-    background:#f44336;
-    color:#fff;
-    border-radius:5px;
-    padding:3px 6px;
-    font-size:0.8rem;
-    margin-bottom: 8px;
-}
-.staff-card a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.85rem;
-    margin-top: 5px;
-    transition: opacity 0.3s;
-}
+.staff-card:hover::after { border-color: #fff; }
+.staff-card img { border-radius: 50%; width: 100px; height: 100px; object-fit: cover; margin-bottom: 10px; }
+.staff-role { background:#f44336; color:#fff; border-radius:5px; padding:3px 6px; font-size:0.8rem; margin-bottom: 8px; }
+.staff-card a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: #fff; font-size: 0.85rem; margin-top: 5px; transition: opacity 0.3s; }
 .staff-card a:hover { opacity: 0.8; }
 
 /* LINKS */
@@ -218,13 +192,11 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
 }
 .link-card:hover::after { width: 100%; }
 
-table a { color: #fff; text-decoration: none; }
-table a:hover { text-decoration: underline; }
-
-/* MOBILE */
+/* MEDIA */
 @media (max-width: 480px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
+    .staff-grid { justify-content: center; }
 }
 </style>
 </head>
@@ -253,19 +225,18 @@ table a:hover { text-decoration: underline; }
 </div>
 
 <main>
+    <!-- DASHBOARD -->
     <div class="section" id="status">
         <h2>Dashboard ufficiale di SukunaBOT</h2>
         <table>
             <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Status</th>
-                </tr>
+                <tr><th>Number</th><th>Status</th></tr>
             </thead>
             <tbody id="numbersTable"></tbody>
         </table>
     </div>
 
+    <!-- STAFF -->
     <div class="section" id="staff">
         <h2>Il Nostro Staff</h2>
         <div class="staff-grid">
@@ -284,6 +255,7 @@ table a:hover { text-decoration: underline; }
         </div>
     </div>
 
+    <!-- LINKS -->
     <div class="section" id="links">
         <h2>I Nostri Collegamenti</h2>
         <div class="links-grid">
@@ -298,15 +270,15 @@ table a:hover { text-decoration: underline; }
 </main>
 
 <script>
-// Hamburger toggle con animazione X
+// Hamburger menu toggle
 const hamburger = document.getElementById('hamburger');
 const navMobile = document.getElementById('navMobile');
 hamburger.addEventListener('click', () => {
-    navMobile.classList.toggle('show');
     hamburger.classList.toggle('active');
+    navMobile.classList.toggle('show');
 });
 
-// Numbers
+// Sample numbers
 const numbers = [
     {"number": "+1 (581) 221-6324", "status": "online"},
     {"number": "+39 081 365 7301", "status": "pending"},
