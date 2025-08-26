@@ -6,19 +6,6 @@
 <title>SukunaBot Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dashboard UFFICIALE SukunaBot">
-<meta property="og:description" content='Hai un bot firmato "Sukuna" nel tuo gruppo e vuoi sapere il suo stato in tempo reale? Premi qui e scoprirai!'>
-<meta property="og:image" content="https://i.ibb.co/PZMDGcS0/c8756687815f6b0c1ee2a41b6f2c5e99.jpg">
-<meta property="og:url" content="https://tuo-sito.com">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dashboard UFFICIALE SukunaBot">
-<meta name="twitter:description" content='Hai un bot firmato "Sukuna" nel tuo gruppo e vuoi sapere il suo stato in tempo reale? Premi qui e scoprirai!'>
-<meta name="twitter:image" content="https://i.ibb.co/PZMDGcS0/c8756687815f6b0c1ee2a41b6f2c5e99.jpg">
-
 <style>
 html { scroll-behavior: smooth; }
 body {
@@ -31,7 +18,6 @@ body {
 
 /* NAV BAR */
 .hero {
-    background: url("https://i.ibb.co/hJ0tZ0L6/3c03686c7dc590a177d215e4587c057a.jpg") center/cover no-repeat;
     height: 60px;
     position: sticky;
     top: 0;
@@ -40,19 +26,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 35px 20px;
-}
-.hero::after {
-    content: "";
-    position: absolute;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.75);
-    z-index: -1;
+    background: #1f1f2e;
 }
 .hero h1 {
     font-size: 1.3em;
     font-weight: bold;
     margin: 0;
-    position: relative;
 }
 
 /* MENU */
@@ -78,21 +57,54 @@ body {
 }
 .nav-links a:hover::after { width: 100%; }
 
+/* HAMBURGER MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    margin: 5px 0;
+    transition: all 0.3s;
+}
+
+/* MOBILE NAV */
+.nav-mobile {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(0,0,0,0.75);
+    transition: max-height 0.3s ease-in-out;
+    z-index: 999;
+}
+.nav-mobile.show {
+    max-height: 500px;
+}
+.nav-mobile a {
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* TABLE STYLES */
 main {
     padding: 30px 20px;
     max-width: 1000px;
     margin: auto;
     margin-top: 40px;
 }
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-.section {
-    max-width: 800px;
-    margin: auto;
-}
+h2 { text-align: center; margin-bottom: 20px; font-weight: 500; }
+.section { max-width: 800px; margin: auto; }
 table {
     width: 100%;
     border-collapse: collapse;
@@ -101,47 +113,41 @@ table {
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     margin-bottom: 60px;
 }
-th, td {
-    padding: 15px 20px;
-    text-align: left;
-    transition: all 0.3s ease;
-}
-th {
-    background: #3b3c5a;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-tr {
-    background: #2a2b40;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-}
-tr:hover {
-    background: #3f3f60;
-    transform: scale(1.02);
-}
+th, td { padding: 15px 20px; text-align: left; }
+th { background: #3b3c5a; text-transform: uppercase; }
+tr { background: #2a2b40; cursor: pointer; }
+tr:hover { background: #3f3f60; transform: scale(1.02); }
 .status-online { color: #4CAF50; font-weight: bold; }
 .status-pending { color: #efea6e; font-weight: bold; }
 .status-ban { color: #f44336; font-weight: bold; }
 .status-founder { color: #ff9800; font-weight: bold; }
 
 /* STAFF */
-.staff-grid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+.staff-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .staff-card {
     background: #27293d;
     border-radius: 15px;
     width: 180px;
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    position: relative;
 }
-.staff-card:hover { transform: translateY(-5px); }
+.staff-card:hover {
+    transform: translateY(-5px);
+}
+.staff-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0);
+    transition: border 0.3s;
+}
+.staff-card:hover::after {
+    border-color: #fff;
+}
 .staff-card img {
     border-radius: 50%;
     width: 100px;
@@ -168,16 +174,9 @@ tr:hover {
     transition: opacity 0.3s;
 }
 .staff-card a:hover { opacity: 0.8; }
-.staff-card svg { width:16px; height:16px; }
 
 /* LINKS */
-.links-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
-}
+.links-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
 .link-card {
     background:#27293d;
     border-radius:12px;
@@ -203,45 +202,39 @@ tr:hover {
     transition: width 0.3s ease;
 }
 .link-card:hover::after { width: 100%; }
-.link-card svg { width:18px; height:18px; }
 
-table a {
-    color: #fff;
-    text-decoration: none;
-    position: relative;
-}
-table a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width 0.3s ease;
-}
-table a:hover::after { width: 100%; }
+table a { color: #fff; text-decoration: none; }
+table a:hover { text-decoration: underline; }
 
-@media (max-width: 600px) {
-    th, td { padding: 12px 10px; }
-    .staff-card { width: 140px; padding:15px; }
-    .staff-card img { width: 80px; height:80px; }
-    .link-card { font-size:0.9rem; padding:10px 14px; }
-    .link-card svg { width:16px; height:16px; }
+@media (max-width: 480px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .staff-grid { justify-content: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV BAR -->
 <div class="hero">
-  <h1>SukunaBot Dashboard</h1>
-  <div class="nav-links">
-      <a href="#">Status</a>
-      <a href="#staff">Staff</a>
-      <a href="#links">Utility</a>
-      <a href="https://stats.uptimerobot.com/iFLcSnXqxf" target="_blank">Monitor</a>
-  </div>
+    <h1>SukunaBot Dashboard</h1>
+    <div class="nav-links">
+        <a href="#">Status</a>
+        <a href="#staff">Staff</a>
+        <a href="#links">Utility</a>
+        <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<div class="nav-mobile" id="navMobile">
+    <a href="#">Status</a>
+    <a href="#staff">Staff</a>
+    <a href="#links">Utility</a>
+    <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
 </div>
 
 <main>
@@ -267,17 +260,13 @@ table a:hover::after { width: 100%; }
                 <img src="https://i.postimg.cc/FHZYdb1R/c8756687815f6b0c1ee2a41b6f2c5e99.jpg" alt="Kekko">
                 <h3>Sukuna</h3>
                 <div class="staff-role">Founder & Server Host</div>
-                <a href="https://instagram.com/__immgiuseetbh" target="_blank">
-                  Instagram
-                </a>
+                <a href="https://instagram.com/__immgiuseetbh" target="_blank">Instagram</a>
             </div>
             <div class="staff-card">
                 <img src="https://i.postimg.cc/XY4nPrc6/file.jpg" alt="Luca">
                 <h3>Luca</h3>
                 <div class="staff-role">Fornitore</div>
-                <a href="https://dashsukuna.netlify.app/unknown.html" target="_blank">
-                  Instagram
-                </a>
+                <a href="https://dashsukuna.netlify.app/unknown.html" target="_blank">Instagram</a>
             </div>
         </div>
     </div>
@@ -297,6 +286,14 @@ table a:hover::after { width: 100%; }
 </main>
 
 <script>
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('navMobile');
+hamburger.addEventListener('click', () => {
+    navMobile.classList.toggle('show');
+});
+
+// Sample numbers
 const numbers = [
     {"number": "+1 (581) 221-6324", "status": "online"},
     {"number": "+39 081 365 7301", "status": "pending"},
