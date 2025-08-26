@@ -60,6 +60,7 @@ tr:hover {
     transform: scale(1.02);
 }
 .status-Attivo { color: #4CAF50; font-weight: bold; }
+.status-InAttesa { color: #efea6e; font-weight: bold; }
 .status-PermaBan { color: #f44336; font-weight: bold; }
 .status-Founder { color: #ff9800; font-weight: bold; }
 td:nth-child(1)::after {
@@ -168,7 +169,7 @@ tr:hover td:nth-child(1)::after { width: 100%; }
 <script>
 const numbers = [
     {"number": "+1 (581) 221-6324", "status": "Attivo"},
-    {"number": "+39 081 365 7301", "status": "Attivo"},
+        {"number": "+39 081 365 7301", "status": "InAttesa"},
     {"number": "+1 (289) 536-1012", "status": "PermaBan"},
     {"number": "+1 (431) 400-7905", "status": "PermaBan"},
     {"number": "+39 329 757 0233", "status": "Founder"}
