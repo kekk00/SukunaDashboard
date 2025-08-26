@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SukunaBot Dashboard</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1f1f2e, #2c2c44);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        transition: background 0.5s ease;
+    }
+
+    header {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        padding: 25px 0;
+        text-align: center;
+        font-size: 2.2em;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    main {
+        padding: 30px 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    th, td {
+        padding: 15px 20px;
+        text-align: left;
+        transition: all 0.3s ease;
+    }
+
+    th {
+        background: #3b3c5a;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tr {
+        background: #2a2b40;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.3s;
+    }
+
+    tr:hover {
+        background: #3f3f60;
+        transform: scale(1.02);
+    }
+
+    .status-active {
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    .status-permaban {
+        color: #f44336;
+        font-weight: bold;
+    }
+
+    .status-owner {
+        color: #ff9800;
+        font-weight: bold;
+    }
+
+    /* Animazione dei numeri */
+    td:nth-child(1) {
+        position: relative;
+    }
+    td:nth-child(1)::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 0;
+        background-color: #fff;
+        transition: width 0.3s;
+    }
+    tr:hover td:nth-child(1)::after {
+        width: 100%;
+    }
+
+    @media (max-width: 600px) {
+        th, td {
+            padding: 12px 10px;
+        }
+    }
+</style>
+</head>
+<body>
+<header>SukunaBot Dashboard</header>
+<main>
+    <h2>Numeri registrati e stato</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Stato</th>
+            </tr>
+        </thead>
+        <tbody id="numbersTable">
+            <!-- I numeri verranno inseriti qui -->
+        </tbody>
+    </table>
+</main>
+
+<script>
+const numbers = [
+    {"number": "+1 (581) 221-6324", "status": "active"},
+    {"number": "+1 (289) 536-1012", "status": "permaban"},
+    {"number": "+1 (431) 400-7905", "status": "permaban"},
+    {"number": "+39 329 757 0233", "status": "owner"}
+];
+
+const tableBody = document.getElementById('numbersTable');
+
+numbers.forEach(item => {
+    const row = document.createElement('tr');
+
+    const numberCell = document.createElement('td');
+    numberCell.textContent = item.number;
+
+    const statusCell = document.createElement('td');
+    statusCell.textContent = item.status;
+    statusCell.className = `status-${item.status.toLowerCase()}`;
+
+    row.appendChild(numberCell);
+    row.appendChild(statusCell);
+    tableBody.appendChild(row);
+});
+</script>
+</body>
+</html>
