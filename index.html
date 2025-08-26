@@ -143,6 +143,7 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
 .status-online { color: #4CAF50; font-weight: bold; }
 .status-pending { color: #efea6e; font-weight: bold; }
 .status-ban { color: #f44336; font-weight: bold; }
+.status-standby { color #03A9FA; font-weight: bold; }
 .status-founder { color: #ff9800; font-weight: bold; }
 table a { color: #fff; text-decoration: none; }
 table a:hover { text-decoration: underline; }
@@ -286,9 +287,9 @@ hamburger.addEventListener('click', () => {
 const numbers = [
     {"number": "+1 (581) 221-6324", "status": "online"},
     {"number": "+39 081 365 7301", "status": "pending"},
+    {"number": "+1 (289) 536-1012", "status": "standby"},
     {"number": "+39 329 757 0233", "status": "founder"},
     {"number": "+39 327 279 0038", "status": "founder"},
-    {"number": "+1 (289) 536-1012", "status": "ban"},
     {"number": "+1 (431) 400-7905", "status": "ban"}
 ];
 const table = document.getElementById('numbersTable');
