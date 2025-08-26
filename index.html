@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SukunaBot Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
 html { scroll-behavior: smooth; }
 body {
@@ -57,33 +56,44 @@ body {
 }
 .nav-links a:hover::after { width: 100%; }
 
-/* HAMBURGER MENU */
+/* HAMBURGER MENU QUADRATO */
 .hamburger {
     display: none;
-    flex-direction: column;
-    justify-content: center;
+    width: 40px;  /* quadrato 4:4 */
+    height: 40px;
+    position: relative;
     cursor: pointer;
-    z-index: 1001;
-    width: 30px;
-    height: 24px;
 }
 .hamburger span {
-    display: block;
+    position: absolute;
     height: 3px;
     width: 100%;
     background: #fff;
-    margin: 4px 0;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
     border-radius: 2px;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: all 0.4s ease;
+}
+.hamburger span:nth-child(1) {
+    transform: rotate(0deg) translateY(-10px);
+}
+.hamburger span:nth-child(2) {
+    transform: rotate(0deg);
+}
+.hamburger span:nth-child(3) {
+    transform: rotate(0deg) translateY(10px);
 }
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(0, 7px);
+    transform: rotate(45deg);
+    top: 50%;
 }
 .hamburger.active span:nth-child(2) {
     opacity: 0;
 }
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(0, -7px);
+    transform: rotate(-45deg);
+    top: 50%;
 }
 
 /* MOBILE NAV */
@@ -101,7 +111,7 @@ body {
     z-index: 999;
 }
 .nav-mobile.show {
-    max-height: 500px;
+    max-height: 400px;
 }
 .nav-mobile a {
     padding: 15px 20px;
@@ -195,8 +205,7 @@ table a:hover { text-decoration: underline; }
 /* MEDIA */
 @media (max-width: 480px) {
     .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .staff-grid { justify-content: center; }
+    .hamburger { display: block; }
 }
 </style>
 </head>
@@ -225,18 +234,14 @@ table a:hover { text-decoration: underline; }
 </div>
 
 <main>
-    <!-- DASHBOARD -->
     <div class="section" id="status">
         <h2>Dashboard ufficiale di SukunaBOT</h2>
         <table>
-            <thead>
-                <tr><th>Number</th><th>Status</th></tr>
-            </thead>
+            <thead><tr><th>Number</th><th>Status</th></tr></thead>
             <tbody id="numbersTable"></tbody>
         </table>
     </div>
 
-    <!-- STAFF -->
     <div class="section" id="staff">
         <h2>Il Nostro Staff</h2>
         <div class="staff-grid">
@@ -255,7 +260,6 @@ table a:hover { text-decoration: underline; }
         </div>
     </div>
 
-    <!-- LINKS -->
     <div class="section" id="links">
         <h2>I Nostri Collegamenti</h2>
         <div class="links-grid">
