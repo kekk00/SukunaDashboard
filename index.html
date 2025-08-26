@@ -174,11 +174,17 @@ const numbers = [
 ];
 
 const table = document.getElementById('numbersTable');
+
 numbers.forEach(n => {
+    // Rimuovi tutto tranne numeri e +
+    const cleanNumber = n.number.replace(/[^0-9+]/g, '');
+    const waLink = `https://wa.me/${cleanNumber.replace('+', '')}`;
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${n.number}</td><td class="status-${n.status}">${n.status}</td>`;
+    tr.innerHTML = `<td><a href="${waLink}" target="_blank" style="color:inherit; text-decoration:none;">${n.number}</a></td>
+                    <td class="status-${n.status}">${n.status}</td>`;
     table.appendChild(tr);
 });
 </script>
+
 </body>
 </html>
