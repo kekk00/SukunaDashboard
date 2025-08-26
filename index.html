@@ -14,6 +14,8 @@ body {
     padding: 0;
 }
 header {
+    position: sticky; /* oppure fixed */
+    top: 0;
     background: linear-gradient(90deg, #f44336, #f44340);
     padding: 25px 0;
     text-align: center;
@@ -21,11 +23,17 @@ header {
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000; /* per stare sopra il resto */
+}
+
 }
 main {
     padding: 30px 20px;
     max-width: 1000px;
     margin: auto;
+    margin-top: 90px; /* compensa l'altezza del header */
+}
+
 }
 h2 {
     text-align: center;
