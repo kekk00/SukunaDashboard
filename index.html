@@ -25,7 +25,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 35px 20px;
+    padding: 0 20px;
     background: #1f1f2e;
 }
 .hero h1 {
@@ -34,7 +34,7 @@ body {
     margin: 0;
 }
 
-/* MENU */
+/* MENU LINKS */
 .nav-links {
     display: flex;
     gap: 20px;
@@ -61,16 +61,29 @@ body {
 .hamburger {
     display: none;
     flex-direction: column;
+    justify-content: center;
     cursor: pointer;
     z-index: 1001;
+    width: 30px;
+    height: 24px;
 }
 .hamburger span {
     display: block;
     height: 3px;
-    width: 25px;
+    width: 100%;
     background: #fff;
-    margin: 5px 0;
-    transition: all 0.3s;
+    margin: 3px 0;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+}
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* MOBILE NAV */
@@ -84,14 +97,16 @@ body {
     max-height: 0;
     overflow: hidden;
     background: rgba(0,0,0,0.75);
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.4s ease, padding 0.4s ease;
     z-index: 999;
+    padding: 0;
 }
 .nav-mobile.show {
-    max-height: 500px;
+    max-height: 300px;
+    padding: 10px 0;
 }
 .nav-mobile a {
-    padding: 15px 20px;
+    padding: 12px 20px;
     color: #fff;
     text-decoration: none;
 }
@@ -206,10 +221,10 @@ tr:hover { background: #3f3f60; transform: scale(1.02); }
 table a { color: #fff; text-decoration: none; }
 table a:hover { text-decoration: underline; }
 
+/* MOBILE */
 @media (max-width: 480px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .staff-grid { justify-content: center; }
 }
 </style>
 </head>
@@ -238,7 +253,6 @@ table a:hover { text-decoration: underline; }
 </div>
 
 <main>
-    <!-- DASHBOARD -->
     <div class="section" id="status">
         <h2>Dashboard ufficiale di SukunaBOT</h2>
         <table>
@@ -252,7 +266,6 @@ table a:hover { text-decoration: underline; }
         </table>
     </div>
 
-    <!-- STAFF -->
     <div class="section" id="staff">
         <h2>Il Nostro Staff</h2>
         <div class="staff-grid">
@@ -271,7 +284,6 @@ table a:hover { text-decoration: underline; }
         </div>
     </div>
 
-    <!-- LINKS -->
     <div class="section" id="links">
         <h2>I Nostri Collegamenti</h2>
         <div class="links-grid">
@@ -286,14 +298,15 @@ table a:hover { text-decoration: underline; }
 </main>
 
 <script>
-// Hamburger menu toggle
+// Hamburger toggle con animazione X
 const hamburger = document.getElementById('hamburger');
 const navMobile = document.getElementById('navMobile');
 hamburger.addEventListener('click', () => {
     navMobile.classList.toggle('show');
+    hamburger.classList.toggle('active');
 });
 
-// Sample numbers
+// Numbers
 const numbers = [
     {"number": "+1 (581) 221-6324", "status": "online"},
     {"number": "+39 081 365 7301", "status": "pending"},
@@ -302,7 +315,6 @@ const numbers = [
     {"number": "+1 (289) 536-1012", "status": "ban"},
     {"number": "+1 (431) 400-7905", "status": "ban"}
 ];
-
 const table = document.getElementById('numbersTable');
 numbers.forEach(n => {
     const cleanNumber = n.number.replace(/[^0-9+]/g, '');
