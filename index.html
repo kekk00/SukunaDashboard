@@ -1,157 +1,103 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SukunaBot Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SukunaBot Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-mode">
 
-<!-- POP-UP DI BENVENUTO -->
+<div id="progress-bar"></div>
+
 <div id="welcomePopup">
-    <div class="popup-content">
-        <h2>Benvenuto su SukunaBot!</h2>
-        <p>Ci teniamo molto alla tua privacy. Confermi di accettare?</p>
-        <button class="popup-btn" id="acceptBtn">Accetto</button>
-    </div>
+  <div class="popup-content">
+    <h2>Benvenuto su SukunaBot!</h2>
+    <p>Ci teniamo molto alla tua privacy. Confermi di accettare?</p>
+    <button class="popup-btn" id="acceptBtn">Accetto</button>
+  </div>
 </div>
 
-<!-- NOTIFICHE -->
+<div id="settingsPopup" class="popup-hidden">
+  <div class="popup-content">
+    <h3>Impostazioni</h3>
+    <div class="setting-item">
+      <span>Modalità Performance (Potato Mode)</span>
+      <label class="switch">
+        <input type="checkbox" id="potatoModeToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <button class="popup-btn" id="closeSettingsBtn">Chiudi</button>
+  </div>
+</div>
+
 <div id="notificationContainer"></div>
 
-<!-- NAVBAR -->
 <div class="hero">
-    <h1>SukunaBot Dashboard</h1>
-    <div class="nav-links">
-        <a href="#">Status</a>
-        <a href="#staff">Staff</a>
-        <a href="#links">Utility</a>
-        <a href="#faq">FAQ</a>
-        <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
-    </div>
-    <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-    </div>
-</div>
-<div class="nav-mobile" id="navMobile">
+  <h1>SukunaBot Dashboard</h1>
+  <div class="nav-links">
     <a href="#">Status</a>
     <a href="#staff">Staff</a>
-    <a href="#links">Utility</a>
     <a href="#faq">FAQ</a>
+    <a href="#links">Utility</a>
     <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<div class="nav-mobile" id="navMobile">
+  <a href="#">Status</a>
+  <a href="#staff">Staff</a>
+  <a href="#faq">FAQ</a>
+  <a href="#links">Utility</a>
+  <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
+  <a id="settingsLink"><i class="fas fa-cogs"></i> Impostazioni</a>
 </div>
 
 <main>
-    <!-- STATUS -->
-    <div class="section card" id="status">
-        <h2>Dashboard ufficiale di SukunaBOT</h2>
-        <table>
-            <thead><tr><th>Number</th><th>Status</th></tr></thead>
-            <tbody id="numbersTable"></tbody>
-        </table>
-    </div>
+  <div class="section card fade-in-section" id="status">
+    <h2>Dashboard ufficiale di SukunaBOT</h2>
+    <table>
+      <thead><tr><th>Number</th><th>Status</th></tr></thead>
+      <tbody id="numbersTable"></tbody>
+    </table>
+  </div>
 
-    <!-- STAFF -->
-    <div class="section" id="staff">
-        <h2>Il Nostro Staff</h2>
-        <div class="staff-grid" id="staffGrid"></div>
-    </div>
+  <div class="section fade-in-section" id="staff">
+    <h2>Il Nostro Staff</h2>
+    <div class="staff-grid" id="staffGrid"></div>
+  </div>
 
-    <!-- LINKS -->
-    <div class="section" id="links">
-        <h2>I Nostri Collegamenti</h2>
-        <div class="links-grid">
-            <a href="#" class="link-card">WhatsApp Group</a>
-            <a href="#" class="link-card">WhatsApp Channel</a>
-            <a href="#" class="link-card">Instagram</a>
-            <a href="#" class="link-card">TikTok</a>
-            <a href="#" class="link-card">Discord</a>
-            <a href="#" class="link-card">Sito Web Esterno</a>
-        </div>
+  <div class="section card fade-in-section" id="faq">
+    <h2>FAQ</h2>
+    <div class="faq-item">Come ottengo il bot?
+      <div class="faq-answer">Parla con uno dello staff</div>
     </div>
+    <div class="faq-item">Quali comandi principali?
+      <div class="faq-answer">!comandi, !profilo, !topgruppi</div>
+    </div>
+    <div class="faq-item">Dove trovo supporto?
+      <div class="faq-answer">Contatta il nostro staff tramite il gruppo Discord o WhatsApp.</div>
+    </div>
+  </div>
 
-    <!-- FAQ -->
-    <div class="section card" id="faq">
-        <h2>FAQ</h2>
-        <div class="faq-item">Come collego il bot?
-            <div class="faq-answer">Scansiona il QR code da WhatsApp per collegare il bot.</div>
-        </div>
-        <div class="faq-item">Quali comandi principali?
-            <div class="faq-answer">/start, /help, /info</div>
-        </div>
-        <div class="faq-item">Dove trovo supporto?
-            <div class="faq-answer">Contatta il nostro staff tramite il gruppo Discord o WhatsApp.</div>
-        </div>
+  <div class="section fade-in-section" id="links">
+    <h2>I Nostri Collegamenti</h2>
+    <div class="links-grid">
+      <a href="#" class="link-card"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+      <a href="#" class="link-card"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+      <a href="#" class="link-card"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="#" class="link-card"><i class="fab fa-tiktok"></i> TikTok</a>
+      <a href="#" class="link-card"><i class="fab fa-discord"></i> Discord</a>
+      <a href="#" class="link-card"><i class="fas fa-globe"></i> Sito Web</a>
     </div>
+  </div>
+
 </main>
 
-<script>
-// Hamburger toggle
-const hamburger = document.getElementById('hamburger');
-const navMobile = document.getElementById('navMobile');
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMobile.classList.toggle('show');
-});
-
-// NUMERI CON STATUS
-const numbers = [
-    {"number":"+1 (581) 221-6324","status":"online"},
-    {"number":"+39 081 365 7301","status":"pending"},
-    {"number":"+1 (289) 536-1012","status":"standby"},
-    {"number":"+39 329 757 0233","status":"founder"},
-    {"number":"+39 327 279 0038","status":"founder"},
-    {"number":"+1 (431) 400-7905","status":"ban"},
-];
-const table = document.getElementById('numbersTable');
-numbers.forEach(n=>{
-    const cleanNumber = n.number.replace(/[^0-9+]/g,'');
-    const waLink = `https://wa.me/${cleanNumber.replace('+','')}`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td><a href="${waLink}" target="_blank">${n.number}</a></td>
-                    <td class="status-${n.status}">${n.status}</td>`;
-    table.appendChild(tr);
-});
-
-// STAFF
-const staff = [
-    {name:"Sukuna", role:"Founder & Server Host", img:"https://i.postimg.cc/FHZYdb1R/c8756687815f6b0c1ee2a41b6f2c5e99.jpg", link:"https://instagram.com/__immgiuseetbh"},
-    {name:"Luca", role:"Fornitore", img:"https://i.postimg.cc/XY4nPrc6/file.jpg", link:"#"}
-];
-const staffGrid = document.getElementById('staffGrid');
-staff.forEach(s=>{
-    const div = document.createElement('div');
-    div.classList.add('staff-card');
-    div.innerHTML = `<img src="${s.img}" alt="${s.name}"><h3>${s.name}</h3><div class="staff-role">${s.role}</div><a href="${s.link}" target="_blank">Profilo</a>`;
-    staffGrid.appendChild(div);
-});
-
-// FAQ toggle
-document.querySelectorAll('.faq-item').forEach(item=>{
-    item.addEventListener('click', ()=>{
-        item.classList.toggle('active');
-    });
-});
-
-// POP-UP E NOTIFICA
-const popup = document.getElementById('welcomePopup');
-const acceptBtn = document.getElementById('acceptBtn');
-const notificationContainer = document.getElementById('notificationContainer');
-acceptBtn.addEventListener('click', ()=>{
-    popup.style.display='none';
-    showNotification("Non dimenticare di scriverti alla nostra newsletter!");
-});
-function showNotification(message){
-    const notif = document.createElement('div');
-    notif.className='notification';
-    notif.textContent=message;
-    notificationContainer.appendChild(notif);
-    // animazione
-    setTimeout(()=>{ notif.style.opacity=1; notif.style.transform='translateY(0)'; },50);
-    setTimeout(()=>{ notif.style.opacity=0; notif.style.transform='translateY(-20px)'; setTimeout(()=>{notif.remove();},500); },6000);
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
