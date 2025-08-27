@@ -559,7 +559,7 @@ newsletterForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({
         email: email,
-        listIds: [12345] // <-- Sostituisci 12345 con l'ID della tua lista Brevo
+        listIds: [4] // <-- Sostituisci 12345 con l'ID della tua lista Brevo
       })
     });
 
