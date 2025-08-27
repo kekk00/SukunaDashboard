@@ -4,238 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SukunaBot Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1f1f2e, #2c2c44);
-    color: #fff;
-    margin: 0;
-    padding: 0;
-}
-
-/* NAV BAR */
-.hero {
-    height: 60px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background: #1f1f2e;
-}
-.hero h1 {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 0;
-}
-
-/* DESKTOP MENU */
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-}
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width 0.3s ease;
-}
-.nav-links a:hover::after { width: 100%; }
-
-/* HAMBURGER MENU QUADRATO */
-.hamburger {
-    display: none;
-    width: 40px;  /* quadrato 4:4 */
-    height: 40px;
-    position: relative;
-    cursor: pointer;
-}
-.hamburger span {
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: #fff;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    border-radius: 2px;
-    transition: all 0.4s ease;
-}
-.hamburger span:nth-child(1) {
-    transform: rotate(0deg) translateY(-10px);
-}
-.hamburger span:nth-child(2) {
-    transform: rotate(0deg);
-}
-.hamburger span:nth-child(3) {
-    transform: rotate(0deg) translateY(10px);
-}
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg);
-    top: 50%;
-}
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg);
-    top: 50%;
-}
-
-/* MOBILE NAV */
-.nav-mobile {
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    background: rgba(0,0,0,0.75);
-    transition: max-height 0.3s ease-in-out;
-    z-index: 999;
-}
-.nav-mobile.show {
-    max-height: 400px;
-}
-.nav-mobile a {
-    padding: 15px 20px;
-    color: #fff;
-    text-decoration: none;
-}
-
-/* TABLE STYLES */
-main {
-    padding: 30px 20px;
-    max-width: 1000px;
-    margin: auto;
-    margin-top: 40px;
-}
-h2 { text-align: center; margin-bottom: 20px; font-weight: 500; }
-.section { max-width: 800px; margin: auto; }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    margin-bottom: 60px;
-}
-th, td { padding: 15px 20px; text-align: left; }
-th { background: #3b3c5a; text-transform: uppercase; }
-tr { background: #2a2b40; cursor: pointer; }
-tr:hover { background: #3f3f60; transform: scale(1.02); }
-.status-online { color: #4CAF50; font-weight: bold; }
-.status-pending { color: #efea6e; font-weight: bold; }
-.status-ban { color: #f44336; font-weight: bold; }
-.status-standby { color: #D3D3D3; font-weight: bold; }
-.status-founder { color: #ff9800; font-weight: bold; }
-table a { color: #fff; text-decoration: none; }
-table a:hover { text-decoration: underline; }
-
-/* STAFF */
-.staff-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.staff-card {
-    background: #27293d;
-    border-radius: 15px;
-    width: 180px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    position: relative;
-}
-.staff-card:hover { transform: translateY(-5px); }
-.staff-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 15px;
-    border: 2px solid rgba(255,255,255,0);
-    transition: border 0.3s;
-}
-.staff-card:hover::after { border-color: #fff; }
-.staff-card img { border-radius: 50%; width: 100px; height: 100px; object-fit: cover; margin-bottom: 10px; }
-.staff-role { background:#f44336; color:#fff; border-radius:5px; padding:3px 6px; font-size:0.8rem; margin-bottom: 8px; }
-.staff-card a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: #fff; font-size: 0.85rem; margin-top: 5px; transition: opacity 0.3s; }
-.staff-card a:hover { opacity: 0.8; }
-
-/* LINKS */
-.links-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
-.link-card {
-    background:#27293d;
-    border-radius:12px;
-    padding:12px 18px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    color:#fff;
-    font-weight:500;
-    transition:transform 0.3s;
-    position: relative;
-}
-.link-card:hover { transform:scale(1.05); }
-.link-card::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width 0.3s ease;
-}
-.link-card:hover::after { width: 100%; }
-
-/* MEDIA */
-@media (max-width: 480px) {
-    .nav-links { display: none; }
-    .hamburger { display: block; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- POP-UP DI BENVENUTO -->
+<div id="welcomePopup">
+    <div class="popup-content">
+        <h2>Benvenuto su SukunaBot!</h2>
+        <p>Ci teniamo molto alla tua privacy. Confermi di accettare?</p>
+        <button class="popup-btn" id="acceptBtn">Accetto</button>
+    </div>
+</div>
+
+<!-- NOTIFICHE -->
+<div id="notificationContainer"></div>
+
+<!-- NAVBAR -->
 <div class="hero">
     <h1>SukunaBot Dashboard</h1>
     <div class="nav-links">
         <a href="#">Status</a>
         <a href="#staff">Staff</a>
         <a href="#links">Utility</a>
+        <a href="#faq">FAQ</a>
         <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
     </div>
     <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
     </div>
 </div>
-
 <div class="nav-mobile" id="navMobile">
     <a href="#">Status</a>
     <a href="#staff">Staff</a>
     <a href="#links">Utility</a>
+    <a href="#faq">FAQ</a>
     <a href="https://sukunabot.betteruptime.com/" target="_blank">Monitor</a>
 </div>
 
 <main>
-    <div class="section" id="status">
+    <!-- STATUS -->
+    <div class="section card" id="status">
         <h2>Dashboard ufficiale di SukunaBOT</h2>
         <table>
             <thead><tr><th>Number</th><th>Status</th></tr></thead>
@@ -243,39 +52,42 @@ table a:hover { text-decoration: underline; }
         </table>
     </div>
 
+    <!-- STAFF -->
     <div class="section" id="staff">
         <h2>Il Nostro Staff</h2>
-        <div class="staff-grid">
-            <div class="staff-card">
-                <img src="https://i.postimg.cc/FHZYdb1R/c8756687815f6b0c1ee2a41b6f2c5e99.jpg" alt="Kekko">
-                <h3>Sukuna</h3>
-                <div class="staff-role">Founder & Server Host</div>
-                <a href="https://instagram.com/__immgiuseetbh" target="_blank">Instagram</a>
-            </div>
-            <div class="staff-card">
-                <img src="https://i.postimg.cc/XY4nPrc6/file.jpg" alt="Luca">
-                <h3>Luca</h3>
-                <div class="staff-role">Fornitore</div>
-                <a href="https://dashsukuna.netlify.app/unknown.html" target="_blank">Instagram</a>
-            </div>
-        </div>
+        <div class="staff-grid" id="staffGrid"></div>
     </div>
 
+    <!-- LINKS -->
     <div class="section" id="links">
         <h2>I Nostri Collegamenti</h2>
         <div class="links-grid">
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">WhatsApp Group</a>
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">WhatsApp Channel</a>
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">Instagram</a>
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">TikTok</a>
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">Discord</a>
-            <a href="https://dashsukuna.netlify.app/unknown.html" class="link-card">Sito Web Esterno</a>
+            <a href="#" class="link-card">WhatsApp Group</a>
+            <a href="#" class="link-card">WhatsApp Channel</a>
+            <a href="#" class="link-card">Instagram</a>
+            <a href="#" class="link-card">TikTok</a>
+            <a href="#" class="link-card">Discord</a>
+            <a href="#" class="link-card">Sito Web Esterno</a>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section card" id="faq">
+        <h2>FAQ</h2>
+        <div class="faq-item">Come collego il bot?
+            <div class="faq-answer">Scansiona il QR code da WhatsApp per collegare il bot.</div>
+        </div>
+        <div class="faq-item">Quali comandi principali?
+            <div class="faq-answer">/start, /help, /info</div>
+        </div>
+        <div class="faq-item">Dove trovo supporto?
+            <div class="faq-answer">Contatta il nostro staff tramite il gruppo Discord o WhatsApp.</div>
         </div>
     </div>
 </main>
 
 <script>
-// Hamburger menu toggle
+// Hamburger toggle
 const hamburger = document.getElementById('hamburger');
 const navMobile = document.getElementById('navMobile');
 hamburger.addEventListener('click', () => {
@@ -283,24 +95,62 @@ hamburger.addEventListener('click', () => {
     navMobile.classList.toggle('show');
 });
 
-// Sample numbers
+// NUMERI CON STATUS
 const numbers = [
-    {"number": "+1 (581) 221-6324", "status": "online"},
-    {"number": "+39 081 365 7301", "status": "pending"},
-    {"number": "+1 (289) 536-1012", "status": "standby"},
-    {"number": "+39 329 757 0233", "status": "founder"},
-    {"number": "+39 327 279 0038", "status": "founder"},
-    {"number": "+1 (431) 400-7905", "status": "ban"}
+    {"number":"+1 (581) 221-6324","status":"online"},
+    {"number":"+39 081 365 7301","status":"pending"},
+    {"number":"+1 (289) 536-1012","status":"standby"},
+    {"number":"+39 329 757 0233","status":"founder"},
+    {"number":"+39 327 279 0038","status":"founder"},
+    {"number":"+1 (431) 400-7905","status":"ban"},
 ];
 const table = document.getElementById('numbersTable');
-numbers.forEach(n => {
-    const cleanNumber = n.number.replace(/[^0-9+]/g, '');
-    const waLink = `https://wa.me/${cleanNumber.replace('+', '')}`;
+numbers.forEach(n=>{
+    const cleanNumber = n.number.replace(/[^0-9+]/g,'');
+    const waLink = `https://wa.me/${cleanNumber.replace('+','')}`;
     const tr = document.createElement('tr');
     tr.innerHTML = `<td><a href="${waLink}" target="_blank">${n.number}</a></td>
                     <td class="status-${n.status}">${n.status}</td>`;
     table.appendChild(tr);
 });
+
+// STAFF
+const staff = [
+    {name:"Sukuna", role:"Founder & Server Host", img:"https://i.postimg.cc/FHZYdb1R/c8756687815f6b0c1ee2a41b6f2c5e99.jpg", link:"https://instagram.com/__immgiuseetbh"},
+    {name:"Luca", role:"Fornitore", img:"https://i.postimg.cc/XY4nPrc6/file.jpg", link:"#"}
+];
+const staffGrid = document.getElementById('staffGrid');
+staff.forEach(s=>{
+    const div = document.createElement('div');
+    div.classList.add('staff-card');
+    div.innerHTML = `<img src="${s.img}" alt="${s.name}"><h3>${s.name}</h3><div class="staff-role">${s.role}</div><a href="${s.link}" target="_blank">Profilo</a>`;
+    staffGrid.appendChild(div);
+});
+
+// FAQ toggle
+document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+        item.classList.toggle('active');
+    });
+});
+
+// POP-UP E NOTIFICA
+const popup = document.getElementById('welcomePopup');
+const acceptBtn = document.getElementById('acceptBtn');
+const notificationContainer = document.getElementById('notificationContainer');
+acceptBtn.addEventListener('click', ()=>{
+    popup.style.display='none';
+    showNotification("Non dimenticare di scriverti alla nostra newsletter!");
+});
+function showNotification(message){
+    const notif = document.createElement('div');
+    notif.className='notification';
+    notif.textContent=message;
+    notificationContainer.appendChild(notif);
+    // animazione
+    setTimeout(()=>{ notif.style.opacity=1; notif.style.transform='translateY(0)'; },50);
+    setTimeout(()=>{ notif.style.opacity=0; notif.style.transform='translateY(-20px)'; setTimeout(()=>{notif.remove();},500); },6000);
+}
 </script>
 
 </body>
