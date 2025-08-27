@@ -134,7 +134,7 @@ newsletterForm.addEventListener('submit', async (e) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "api-key": "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"
+        "api-key": "xsmtpsib-ba5d1dd92b2dff651208cf731af7a0e8d4417db78dae8d27fea533f6173f5a17-ERj5fSqJIzYNHDK1"
       },
       body: JSON.stringify({
         email: email,
