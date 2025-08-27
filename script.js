@@ -116,3 +116,40 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 faders.forEach(el => observer.observe(el));
+
+// Newsletter Brevo
+const newsletterForm = document.getElementById('newsletter-form');
+const newsletterEmail = document.getElementById('newsletter-email');
+const newsletterStatus = document.getElementById('newsletter-status');
+
+newsletterForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = newsletterEmail.value.trim();
+  if (!email) return;
+
+  newsletterStatus.textContent = "Invio in corso...";
+
+  try {
+    const response = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": "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"
+      },
+      body: JSON.stringify({
+        email: email,
+        listIds: [3] // <-- Sostituisci 12345 con l'ID della tua lista Brevo
+      })
+    });
+
+    if (response.ok) {
+      newsletterStatus.textContent = "Grazie! Ti sei iscritto alla newsletter.";
+      newsletterForm.reset();
+    } else {
+      const data = await response.json();
+      newsletterStatus.textContent = `Errore: ${data.message || "Impossibile iscriversi."}`;
+    }
+  } catch (err) {
+    newsletterStatus.textContent = "Errore di connessione. Riprova.";
+  }
+});
