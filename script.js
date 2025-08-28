@@ -1,8 +1,8 @@
 // Dati per i numeri e lo staff
 const numbers = [
   {"number":"+1 (289) 536-1012","status":"online"},
-  {"number":"+1 (581) 221-6324","status":"standby"},
   {"number":"+39 081 365 7301","status":"pending"},
+  {"number":"+1 (581) 221-6324","status":"standby"},
   {"number":"+39 329 757 0233","status":"founder"},
   {"number":"+39 327 279 0038","status":"founder"},
   {"number":"+1 (431) 400-7905","status":"ban"},
